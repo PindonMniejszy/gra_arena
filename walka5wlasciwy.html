@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="start">walcz</button>
+    <div id="komunikat"></div><br />
+    <div id="komunikat2"></div>
+    <div id="komunikat3"></div>
+    <script type="text/javascript">
+        const a = {
+            zycie: 610,
+            rany: 210,
+            kondycja: 34, // utrata kondycji zalezna od sumy ciężaru uzbrojenia
+            atak: 70,
+            obrona: 67,
+        };
+
+        const b = {
+            zycie: 610,
+            rany: 210,
+            kondycja: 34, //traci kondycji na ture (odejmuje od zycia)
+            atak: 70, //różnica atak - obrona przeciwnika = utrata ran
+            obrona: 67,
+        };
+
+        const walcz = document.querySelector("button");
+        walcz.addEventListener("click", walka);
+
+
+        function walka() {
+            var zycieJa = a.zycie;
+            var ranyJa = a.rany;
+            var kondycjaJa = a.kondycja;
+            var atakJa = a.atak;
+            var obronaJa = a.obrona;
+            //przeciwnik
+            var zycieTy = b.zycie;
+            var ranyTy = b.rany;
+            var kondycjaTy = b.kondycja;
+            var atakTy = b.atak;
+            var obronaTy = b.obrona;
+            //pomocnicze
+            var obrazenia = 0;
+            var obrazenia2 = 0;
+            console.log(zycieJa);
+            if (zycieJa <= 0 || ranyJa <= 0 || zycieTy <= 0 || ranyTy <= 0) {
+                document.getElementById("komunikat").innerHTML = ("Walka nie mogła się odbyć</br>");
+            } else {
+                document.getElementById("komunikat").innerHTML = ("Walka rozpoczęta</br><hr>");
+                // poprawic obliczanie zeby nie było ujemności ifem => poprawione ale z małym błędem
+                document.getElementById("komunikat").innerHTML += ('<table border="1"><tr><td>Twoje życie: ' + zycieJa + '<br>rany: ' + ranyJa + '<br>kondycja: ' + kondycjaJa + '<br>atak: ' + atakJa + '<br>obrona :' + obronaJa + ' </td><td>Życie przeciwnika: ' + zycieTy + '<br>rany: ' + ranyTy + '<br>kondycja: ' + kondycjaTy + '<br>atak: ' + atakTy + '<br>obrona :' + obronaTy + ' </td></tr></table>');
+
+                var tura = 0;
+
+
+                while (zycieJa >= 0 && ranyJa >= 0 && zycieTy >= 0 && ranyTy >= 0) // tu musi byc lub
+                {
+                    obrazenia = (atakJa - obronaTy) + Math.floor(Math.random() * 10);
+
+                    ranyTy = ranyTy - obrazenia;
+                    zycieJa = zycieJa - kondycjaJa;
+
+                    //riposta
+                    obrazenia2 = atakTy - obronaJa + Math.floor(Math.random() * 10);
+
+                    ranyJa = ranyJa - obrazenia2;
+                    zycieTy = zycieTy - kondycjaTy;
+
+
+
+                    var kom1 = "Tura: " + ++tura + "<br> Atakuję: <br />zadaję cios i tracę " + kondycjaJa + " kondycji<br />";
+                    var kom2 = "Pozostało mi " + zycieJa + " życia, przeciwnik traci " + obrazenia + " ran<br /><hr><br />";
+                    var kom3 = "Kontratak: <br />Przeciwnik zadaję cios i traci " + kondycjaTy + " kondycji<br />";
+                    var kom4 = "Pozostało mu " + zycieTy + " życia, Ja tracę " + obrazenia2 + " ran<br /><hr color=\"red\"><br />";
+
+                    document.getElementById("komunikat2").innerHTML += (kom1 + kom2 + kom3 + kom4);
+                }
+
+                if (zycieJa <= 0) {
+                    zycieJa = 0
+                }
+                if (zycieTy <= 0) {
+                    zycieTy = 0
+                }
+                if (ranyJa <= 0) {
+                    ranyJa = 0
+                }
+                if (ranyTy <= 0) {
+                    ranyTy = 0
+                }
+
+                document.getElementById("komunikat2").innerHTML += ("Koniec walki, Twoje życie " + zycieJa + ", twoje rany" + ranyJa + "<br />Życie przeciwnika " + zycieTy + ", pozosrtało ran przeciwnikowi " + ranyTy + "<br /><hr color=blue>");
+            }
+
+
+            if (zycieJa > zycieTy) {
+                document.getElementById("komunikat2").innerHTML += ("Wygrałeś Ty na Ko - ");
+            } else if (zycieJa < zycieTy) {
+                document.getElementById("komunikat2").innerHTML += ("Wygrał Przeciwnik na Ko - ");
+            } else {
+                document.getElementById("komunikat2").innerHTML += ("Remis na KO - ");
+            }
+
+            if (ranyJa > ranyTy) {
+                document.getElementById("komunikat2").innerHTML += ("Wygrałeś Ty na rany");
+            } else if (ranyJa < ranyTy) {
+                document.getElementById("komunikat2").innerHTML += ("Wygrał Przeciwnik na rany");
+            } else {
+                document.getElementById("komunikat2").innerHTML += ("Remis na RA");
+            }
+            document.getElementById("komunikat3").innerHTML += ('<table border="1"><tr><td>Twoje życie: ' + zycieJa + '<br>rany: ' + ranyJa + '<br>kondycja: ' + kondycjaJa + '<br>atak: ' + atakJa + '<br>obrona :' + obronaJa + ' </td><td>Życie przeciwnika: ' + zycieTy + '<br>rany: ' + ranyTy + '<br>kondycja: ' + kondycjaTy + '<br>atak: ' + atakTy + '<br>obrona :' + obronaTy + ' </td></tr></table>');
+
+        }
+
+
+
+
+
+        //####################################################################################
+        /*
+        var obrazenia = atakJa - obronaTy;
+                    ranyTy = ranyTy-obrazenia;
+                    zycieJa = zycieJa-kondycjaJa;
+                    document.getElementById("komunikat2").innerHTML += ("Zadałeś "+obrazenia+" obrażeń przeciwnikowi");
+    
+        */
+
+        //console.log("początkowe wartości: <br>");
+        //console.log("życie A: "+a.zycie+" "+
+        //           "rany A: "+a.rany+" ");
+
+
+        // while(b.rany>0 || b.zycie>0 || a.rany>0 || a.zycie>0){
+        // var obrazeniaA = a.atak - b.obrona;
+        //   console.log("obrażenia "+obrazeniaA);
+        // a.zycie = a.zycie - a.kondycja;
+        //    console.log("życie: "+a.zycie);
+        // b.rany = b.rany - obrazeniaA;
+
+        // var wynik = "gracz A zadał "+obrazeniaA+" obrażeń graczowi B. Gracz B ma teraz "+b.rany+" ran.";
+        //  var wynik2 += wynik;
+        //  console.log(wynik2);
+
+        // }
+
+
+
+        //  console.log(a.zycie);
+
+    </script>
+</body>
+
+</html>
