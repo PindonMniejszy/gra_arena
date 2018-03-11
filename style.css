@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#cialo{
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+    width: 1000px;    
+    background-color: #ffee68;
+}
+#cialo nav{
+    height: 100px;
+    background-color: #c12222;
+}
+#center{
+    height: 668px;
+}
+#lewy{
+    float: left;
+    height: 668px;
+    width: 300px;
+    background-color: #20fdec;
+}
+#mapa_blok{
+    float: left;
+    height: 668px;
+    width: 500px;
+    background-color: #049187;
+}
+
+#mapa {
+    float: left;
+    height: 500px;
+    width: 500px;    
+    background-image: url("image/mapa_miasto1.png");
+}
+
+#prawy{
+    float: left;
+    height: 668px;
+    width: 200px;
+    background-color: #00312d
+}

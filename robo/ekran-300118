@@ -1,0 +1,12 @@
+ekran: mial byc 1366 ale zostaje przy 1024
+wysokość,: gorna belka 100px (50px na menu i 50px na menu systemowe), mapa 500px, 
+
+
+mapa(centrum): 500x500, zmienic obsluge mapy, na mapie tylko ikona naszego hipka, zeby bylo wiadomo gdzie jest, natomiast okno po prawej, zawiera liste graczy w danej lokacji, ew dodatkowy div z lista graczy w danym budynku.
+
+
+prawy: lista gracz
+
+
+
+lewy: paneldzialan (podobnie jak w arenie)
